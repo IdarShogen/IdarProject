@@ -5,8 +5,11 @@ public class N {
     public static void main(String[] args) {
         arrayList<Object> arrayList = new arrayList<>();
         arrayList.FunctionCall();
+
+
     }
 }
+
 
 
 
@@ -20,7 +23,7 @@ class arrayList<E>{
         System.out.println("Начальный список:\n" + Arrays.toString(array));
         System.out.println("Список с новым элементом:\n" + Arrays.toString(Add()));
         Remove();
-        Get();
+        Get(14);
         AddIn();
     }
     public Object[] Initialization(){
@@ -82,11 +85,8 @@ class arrayList<E>{
         System.out.println("Список без удаленного элемента:\n" + Arrays.toString(array));
     }
 
-    public void Get(){
-        System.out.println("Введите индекс элемента который хотите вывести:    ");
-        Scanner con = new Scanner(System.in);
-        int index = con.nextInt() - 1;
-        System.out.println("Ваш элемент:    "+array[index]);
+    public E Get(int index){
+        return array[index];
     }
 
     public void AddIn(){
@@ -99,7 +99,9 @@ class arrayList<E>{
         E input = (E) str;
         for (int i = 0; i < index; i++) {
             newArray[i] = array[i];
-        }newArray[index] = input;
+        }
+        newArray[index] = input;
+
         for (int i = index + 1; i < array.length + 1; i++) {
             newArray[i] = array[i - 1];
         }
