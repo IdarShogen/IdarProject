@@ -19,14 +19,21 @@ public class DA {
 
 
 class IdarList<E>{
-    private E[] array = (E[]) new Object[0];
-
+    private E[] array = (E[]) new Object[10];
+    private int count = 0;
 
     public E[] add(E element){
-        array = Arrays.copyOf(array, array.length + 1);
-        array[array.length - 1] = element;
+        increase();
+        for (int i = 0; i < array.length; i++) {
+            if(array[i] == null){
+                array[i] = element;
+                break;
+            }
+        }
+        ++count;
         return array;
     }
+
 
     public E[] remove(int index){
         if((index) >= 0 && (index) < array.length){
@@ -40,6 +47,7 @@ class IdarList<E>{
         }
     }
 
+
     public E get(int index){
         if((index) >= 0 && (index) < array.length) {
             return array[index];
@@ -48,13 +56,15 @@ class IdarList<E>{
         }
     }
 
+
     public E[] add(int index, E element){
         if(index >= 0 && index < array.length){
-            array = Arrays.copyOf(array, array.length + 1);
+            increase();
             for (int i = array.length - 1; i > index; --i) {
                 array[i] = array[i - 1];
             }
             array[index] = element;
+            ++count;
             return array;
         }
         else {
@@ -64,6 +74,14 @@ class IdarList<E>{
 
 
     public E[] toArray(){
+        return array;
+    }
+
+
+    public E[] increase(){
+        if((double)count / array.length >= 0.75){
+            array = Arrays.copyOf(array, (int)(array.length * 1.5));
+        }
         return array;
     }
 }
